@@ -46,16 +46,13 @@
             buttons.attr("data-name", animals[i]);
             $(".buttons").append(buttons);
         };
-
-
         // Adding click event listen listener to all buttons
-        $(".buttons").on("click", function () {
-            var animal = $(this).attr("cat");
-
+        $(document).on("click",".buttonslook", function () {
+            $("#gifs-appear-here").empty();
+            var animal = $(this).attr("data-name");
             var key = "mQIiV1DbxnGqe3cVutgW0NTCFQ9VYwXD"
             // Constructing a queryURL using the animal name
             var queryURL = "https://api.giphy.com/v1/gifs/search?q="+ animal +"&api_key=" + key  +"&limit=10";
-
             // Performing an AJAX request with the queryURL
             $.ajax({
                 url: queryURL,
@@ -63,13 +60,10 @@
             })
                 // After data comes back from the request
                 .then(function (response) {
-
                     console.log("data:" + response.data[2].type);
                     // storing the data from the AJAX request in the results variable
-
                     var results = response.data;
                     // Looping through each result item
-
                     for (var i = 0; i < results.length; i++) {
                         var p = $("<p>").text(results[i].rating);
                         console.log(results[i].rating);
@@ -84,7 +78,6 @@
                 }
                 )
         })
-
     </script>
 </body>
 
