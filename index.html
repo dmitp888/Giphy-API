@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        .buttonslook {
+            color: white;
+            size: 20px;
+            font-size: 25px;
+            margin: 10px;
+            background-color: #5a44b2;
+            box-shadow: 0 0 12px 0px black;
+            text-shadow: 0.5px 1px 0px black;
+        }
+    </style>
+ <div class="container">
+        <!-- This form will be where users input data about the movies -->
+        <form id="gif-form">
+          <label for="gif-input">Add an animal</label>
+          <br>
+          <input type="text" id="gif-input"><br>
+    
+          <!-- This button will trigger our AJAX call -->
+          <input id="find-gif" type="submit" value="Submit">
+        </form>
+        <br>
+ </div>
+
+    <div class="buttons"> </div>
+    <!-- Retrieved data will be dumped here -->
+    <div id="gifs-appear-here"> </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        var animals = ["cat", "dog", "hamster", "camel", "mouse"];
+        for (i = 0; i < animals.length; i++) {
+            var buttons = $("<button>");
+            buttons.text(animals[i]);
+            buttons.addClass("buttonslook");
+            buttons.attr("data-name", animals[i]);
+            $(".buttons").append(buttons);
+        };
+
+
+        // Adding click event listen listener to all buttons
+        $(".buttons").on("click", function () {
+            var animal = $(this).attr("cat");
+
+            var key = "mQIiV1DbxnGqe3cVutgW0NTCFQ9VYwXD"
+            // Constructing a queryURL using the animal name
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q="+ animal +"&api_key=" + key  +"&limit=10";
+
+            // Performing an AJAX request with the queryURL
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            })
+                // After data comes back from the request
+                .then(function (response) {
+
+                    console.log("data:" + response.data[2].type);
+                    // storing the data from the AJAX request in the results variable
+
+                    var results = response.data;
+                    // Looping through each result item
+
+                    for (var i = 0; i < results.length; i++) {
+                        var p = $("<p>").text(results[i].rating);
+                        console.log(results[i].rating);
+                        var gifDiv = $("<div>");
+                        // Creating and storing an image tag
+                        var animalImage = $("<img>");
+                        animalImage.attr("src", results[i].images.fixed_height.url)
+                        gifDiv.append(p);
+                        gifDiv.append(animalImage);
+                        $("#gifs-appear-here").prepend(gifDiv);
+                    }
+                }
+                )
+        })
+
+    </script>
+</body>
+
+</html>
