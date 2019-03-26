@@ -5,11 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Superhero gifs </title>
 </head>
-
 <body>
+   
     <style>
+   body {
+
+background-image: url("Giphy-API\images\marvel-comics-wallpaper-wall-mural-3d-wallpaper-for-walls-kids-bedroom-living-room-decor-tv-background-wall-covering-super-hero-wallpaper.jpg");
+
+   }     
         .buttonslook {
             color: white;
             size: 20px;
@@ -20,39 +25,44 @@
             text-shadow: 0.5px 1px 0px black;
         }
     </style>
- <div class="container">
-        <!-- This form will be where users input data about the movies -->
+    <div class="container">
+        <!-- This form will be where users input data about the Superheros -->
         <form id="gif-form">
-          <label for="gif-input">Add an animal</label>
-          <br>
-          <input type="text" id="gif-input"><br>
-    
-          <!-- This button will trigger our AJAX call -->
-          <input id="find-gif" type="submit" value="Submit">
+            <label for="gif-input"> Add a superhero! </label>
+            <br>
+            <input type="text" id="gif-input"><br>
+            <!-- This button will trigger our AJAX call -->
+            <input id="add-gif" type="submit" value="Submit">
         </form>
         <br>
- </div>
-
-    <div class="buttons"> </div>
+    </div>
+    <div id="buttons-view" class="buttons"> </div>
     <!-- Retrieved data will be dumped here -->
     <div id="gifs-appear-here"> </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
-        var animals = ["cat", "dog", "hamster", "camel", "mouse"];
-        for (i = 0; i < animals.length; i++) {
-            var buttons = $("<button>");
-            buttons.text(animals[i]);
-            buttons.addClass("buttonslook");
-            buttons.attr("data-name", animals[i]);
-            $(".buttons").append(buttons);
-        };
+        var superheroes = ["captain america", "spider-man", "hulk", "green arrow", "jessica jones", "x-men", "umbrella academy"];
+        function renderButtons() {
+            // Deleting the Superheros prior to adding new Superheros
+            // (this is necessary otherwise you will have repeat buttons)
+            $("#buttons-view").empty();
+            // Looping through the array of Superheros
+            // Then dynamicaly generating buttons for each superhero in the array
+            for (i = 0; i < superheroes.length; i++) {
+                var buttons = $("<button>");
+                buttons.text(superheroes[i]);
+                buttons.addClass("buttonslook");
+                buttons.attr("data-name", superheroes[i]);
+                $("#buttons-view").append(buttons);
+            };
+        }
         // Adding click event listen listener to all buttons
-        $(document).on("click",".buttonslook", function () {
+        $(document).on("click", ".buttonslook", "newbutton", function () {
             $("#gifs-appear-here").empty();
-            var animal = $(this).attr("data-name");
+            var superhero = $(this).attr("data-name");
             var key = "mQIiV1DbxnGqe3cVutgW0NTCFQ9VYwXD"
-            // Constructing a queryURL using the animal name
-            var queryURL = "https://api.giphy.com/v1/gifs/search?q="+ animal +"&api_key=" + key  +"&limit=10";
+            // Constructing a queryURL using the superhero name
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + superhero + "&api_key=" + key + "&limit=10";
             // Performing an AJAX request with the queryURL
             $.ajax({
                 url: queryURL,
@@ -60,7 +70,6 @@
             })
                 // After data comes back from the request
                 .then(function (response) {
-                    console.log("data:" + response.data[2].type);
                     // storing the data from the AJAX request in the results variable
                     var results = response.data;
                     // Looping through each result item
@@ -78,6 +87,18 @@
                 }
                 )
         })
+        $("#add-gif").on("click", function (event) {
+            event.preventDefault();
+            // This line grabs the input from the textbox
+            var superhero = $("#gif-input").val().trim();
+            // Adding superhero from the textbox to our array
+            superheroes.push(superhero);
+            console.log(superhero, superheroes)
+            // Calling renderButtons which handles the processing of our superhero array
+            renderButtons();
+        });
+        // Adding a click event listener to all elements with a class of "superhero-btn"
+        renderButtons();
     </script>
 </body>
 
