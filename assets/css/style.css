@@ -22,3 +22,10 @@ background-image: url(../images/comics-wallpaper4.jpg)
     border-image: initial;
     text-align: center;
 }
+p {
+    color: white;
+    background: #5a44b2;
+    margin-right: 90%;
+    font-size: 18px;
+    background-color: #4c30c680;
+}
