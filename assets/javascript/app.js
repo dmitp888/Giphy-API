@@ -1,5 +1,5 @@
 var superheroes = ["captain america", "spider-man", "hulk", "green arrow", "jessica jones", "x-men",
-"umbrella academy"];
+"umbrella academy","aquaman","thor"];
 function renderButtons() {
 // Deleting the Superheros prior to adding new Superheros
 // (this is necessary otherwise you will have repeat buttons)
