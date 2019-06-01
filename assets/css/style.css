@@ -11,13 +11,12 @@ background-image: url(../images/comics-wallpaper4.jpg)
     text-shadow: 0.5px 1px 0px black;
 }
 .container {
-    margin-top: 20px;
+    height: 94px;
     color: white;
-    font-size: 27px;
+    font-size: 24px;
     background-color: #5a44b2;
     margin-left: 75%;
     box-shadow: 0 0 black;
-    border-width: 15px;
     border-style: outset;
     border-image: initial;
     text-align: center;
@@ -35,4 +34,18 @@ p {
 .superhero-item {
     float: left;
     padding: 10px;
+  }
+  #header{
+    text-align: center;
+    color: white;
+    background: #2d1753a3;
+    width: 70%;
+    margin-left: 15%;
+  }
+  #instructions{
+    background: aliceblue;
+    height: 20px;
+    margin: 10px;
+    font-size: 20px;
+    width: fit-content;
   }
