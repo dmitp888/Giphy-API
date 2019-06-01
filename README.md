@@ -1,5 +1,6 @@
 # Giphy-API
 Using  GIPHY API to make a dynamic web page that populates with gifs of diffrent superhero characters. Technologies used:JavaScript, jQuery,HTML,CSS.
+![alt text](gify.png)
 
 
   The app  takes the topics in the array of strings and creates buttons in  HTML using a loop that appends a button for each string in the array. When the user clicks on a button, the page  grabs 10 static, non-animated gif images from the GIPHY API and places them on the page.
